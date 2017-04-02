@@ -1,6 +1,6 @@
 // https://github.com/cvzi/RequestQueue
 // A simple queue for GM_xmlhttpRequests or other async functions
-// Version 4
+// Version 5
 
 "use strict";
 
@@ -114,4 +114,22 @@ function RequestQueue(maxParallel,maxTotal) {
     this.abortPending();
     this.abortRunning();
   };
+  
+  this.resetTotal = function() {
+    // Reset number of finished requests
+    finished = 0;
+  }
+  
+  this.hasReachedTotal = function() {
+    // Number of maximum allowed requests reached?
+    return finished >= maxTotal;
+  }
+  
+  this.hasRunning = function() {
+    // Are there any running requests?
+    return running.length > 0;
+  }
+  
+  
 }
+
