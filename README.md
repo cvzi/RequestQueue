@@ -2,7 +2,7 @@
 A simple queue for XMLHttpRequests or other async functions. Optimized for Greasemonkey GM_xmlhttpRequests
 
 
-##Documentation
+## Documentation
 
 ```js
 new RequestQueue([maxParallel[, maxTotal]])
@@ -62,7 +62,7 @@ Abort both running and pending requests
 
 
 
-##Example
+## Example
 
 ```js
 var rq = new RequestQueue(1); // 1 -> Allow no parallel requests
@@ -86,7 +86,9 @@ The request to page 1 will be sent immediately.
 The request to page 2 will be sent after the the first request has finished, but before the first onload event is called.
 
 
-##Version history
+## Version history
+* Version 5
+ * New methods: resetTotal(), hasReachedTotal(), hasRunning()
 * Version 4
  * Fix for XMLHttpRequest.abort() 
 * Version 3
