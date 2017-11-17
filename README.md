@@ -87,6 +87,8 @@ The request to page 2 will be sent after the the first request has finished, but
 
 
 ## Version history
+* Version 6
+ * Support for Greasemonkey version 4 and Firefox version 57
 * Version 5
  * New methods: resetTotal(), hasReachedTotal(), hasRunning()
 * Version 4
