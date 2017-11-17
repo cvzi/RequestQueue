@@ -1,6 +1,20 @@
-// https://github.com/cvzi/RequestQueue
-// A simple queue for GM_xmlhttpRequests or other async functions
-// Version 5
+// ==UserScript==
+// @exclude     *
+// ==UserLibrary==
+// @name        RequestQueue
+// @description A simple queue for GM_xmlhttpRequests or other async functions
+// @version     6
+// @license     MIT
+// ==/UserLibrary==
+// @namespace   cuzi
+// @homepageURL https://github.com/cvzi/RequestQueue/
+// @grant       GM_xmlhttpRequest
+// @grant       GM.xmlhttpRequest
+// ==/UserScript==
+
+// ==OpenUserJS==
+// @author      cuzi
+// ==/OpenUserJS==
 
 "use strict";
 
@@ -14,6 +28,17 @@ function RequestQueue(maxParallel,maxTotal) {
   var finished = 0; // Number of finished requests
   var pending = [];
   var running = [];
+  
+  
+  
+  
+  var defaultFunction;
+  if(typeof GM != "undefined" && "xmlHttpRequest" in GM) {
+    defaultFunction = GM.xmlHttpRequest;
+  } else {
+    defaultFunction = function(a,b,c,d) { return GM_xmlhttpRequest(a,b,c,d);} // Wrap GM_xmlhttpRequest to avoid security exception
+  }
+
 
   /*
   The internal request Object extended by add(req,fun,thisArg)
@@ -59,11 +84,11 @@ function RequestQueue(maxParallel,maxTotal) {
 
   this.add = function(req,fun,thisArg) {
     // Schedule a request: add(req[, fun[, thisArg]])
-    // fun:      defaults to GM_xmlhttpRequest
+    // fun:      defaults to GM.xmlHttpRequest
     // thisArg:  The value of this provided for the call to fun. Keep strict mode in mind!
     req.id = index++;
 
-    req.__fun = typeof(fun) === 'function'?fun:function(a,b,c,d) { return GM_xmlhttpRequest(a,b,c,d);}; // Wrap GM_xmlhttpRequest to avoid security exception
+    req.__fun = typeof(fun) === 'function'?fun:defaultFunction; 
     req.__thisArg = thisArg;
 
     // Wrap events that indicate that the request has finished
@@ -132,4 +157,3 @@ function RequestQueue(maxParallel,maxTotal) {
   
   
 }
-
