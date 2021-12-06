@@ -2,14 +2,12 @@
 // @exclude     *
 // ==UserLibrary==
 // @name        RequestQueue
-// @description A simple queue for GM_xmlhttpRequests or other async functions
+// @description A simple queue for GM.xmlHttpRequest, GM_xmlhttpRequests or other async functions
 // @version     6
 // @license     MIT
 // ==/UserLibrary==
 // @namespace   cuzi
 // @homepageURL https://github.com/cvzi/RequestQueue/
-// @grant       GM_xmlhttpRequest
-// @grant       GM.xmlhttpRequest
 // ==/UserScript==
 
 // ==OpenUserJS==
